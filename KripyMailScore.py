@@ -5,6 +5,7 @@ import requests
 from email.header import decode_header
 from urllib.parse import urlparse
 from colorama import Fore, Style, init
+import sys
 
 # Initialize colorama
 init(autoreset=True)
@@ -22,6 +23,26 @@ def display_logo():
        {Fore.YELLOW}Phishing Email Detector
     """
     print(logo)
+
+def display_help():
+    help_text = f"""
+{Fore.GREEN}Usage: python spam.py <email_file.eml>
+
+Options:
+  -h, --help    Show this help message and exit.
+
+Description:
+  This script analyzes email files (.eml) to detect phishing attempts. It checks for:
+  - Spoofed senders
+  - Urgent language indicating phishing
+  - Suspicious attachments
+  - Hidden or shortened URLs
+  - Generic greetings commonly used in phishing emails
+  - Other phishing indicators
+
+  The program assigns a suspicion score and provides a risk assessment based on detected threats.
+    """
+    print(help_text)
 
 class PhishingDetector:
     def __init__(self, email_file):
@@ -127,30 +148,21 @@ class PhishingDetector:
         return len(extracted.domain) < 5
     
     def _generate_report(self):
-        if self.suspicious_score > 8:
-            risk_level = f"{Fore.RED}Maximum Chance of Risk, Be Careful!"
-        elif 3 <= self.suspicious_score <= 8:
-            risk_level = f"{Fore.YELLOW}Possible Risk"
-        else:
-            risk_level = f"{Fore.GREEN}Probable Risk"
-        
+        risk_level = (
+            f"{Fore.RED}Maximum Chance of Risk, Be Careful!" if self.suspicious_score > 8 else
+            f"{Fore.YELLOW}Possible Risk" if 3 <= self.suspicious_score <= 8 else
+            f"{Fore.GREEN}Probable Risk"
+        )
         print(f"\n{Fore.YELLOW}PHISHING DETECTION REPORT")
         print(f"{Fore.CYAN}Total Suspicion Score: {self.suspicious_score}")
         print(f"{Fore.MAGENTA}Conclusion: {risk_level}\n")
-        
-        for category, findings in self.results.items():
-            if findings:
-                print(f"{Fore.BLUE}{category.replace('_', ' ').title()}")
-                if isinstance(findings, list):
-                    for item in findings:
-                        print(f" {Fore.WHITE}- {item}")
-                else:
-                    print(f" {Fore.WHITE}- Detected")
-    
+
 if __name__ == "__main__":
-    import sys
-    if len(sys.argv) != 2:
-        print(f"{Fore.RED}Usage: python phishing_detector.py <email_file.eml>")
+    if len(sys.argv) == 2 and sys.argv[1] in ('-h', '--help'):
+        display_help()
+        sys.exit(0)
+    elif len(sys.argv) != 2:
+        print(f"{Fore.RED}Usage: python spam.py <email_file.eml>")
         sys.exit(1)
     
     display_logo()
