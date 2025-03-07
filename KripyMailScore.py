@@ -28,7 +28,7 @@ def display_logo():
 
 def display_help():
     help_text = f"""
-{Fore.GREEN}Usage:sudo python KripyMailScore.py <email_file.eml>
+{Fore.GREEN}Usage:sudo python3 KripyMailScore.py <email_file.eml>
 
 Options:
   -h, --help    Show this help message and exit.
@@ -165,7 +165,7 @@ if __name__ == "__main__":
         display_help()
         sys.exit(0)
     elif len(sys.argv) != 2:
-        print(f"{Fore.RED}Usage: python spam.py <email_file.eml>")
+        print(f"{Fore.RED}Usage: python3 KripyMailScore.py <email_file.eml>")
         sys.exit(1)
     
     display_logo()
