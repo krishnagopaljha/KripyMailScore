@@ -28,7 +28,7 @@ def display_logo():
 
 def display_help():
     help_text = f"""
-{Fore.GREEN}Usage:sudo python spam.py <email_file.eml>
+{Fore.GREEN}Usage:sudo python KripyMailScore.py <email_file.eml>
 
 Options:
   -h, --help    Show this help message and exit.
