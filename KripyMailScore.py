@@ -145,10 +145,6 @@ class PhishingDetector:
                 body += part.get_payload(decode=True).decode(charset, errors='replace')
         return body
     
-    def _is_new_domain(self, domain):
-        extracted = tldextract.extract(domain)
-        return len(extracted.domain) < 5
-    
     def _generate_report(self):
         risk_level = (
             f"{Fore.RED}Maximum Chance of Risk, Be Careful!" if self.suspicious_score > 8 else
@@ -158,6 +154,11 @@ class PhishingDetector:
         print(f"\n{Fore.YELLOW}PHISHING DETECTION REPORT")
         print(f"{Fore.CYAN}Total Suspicion Score: {self.suspicious_score}")
         print(f"{Fore.MAGENTA}Conclusion: {risk_level}\n")
+        
+        print(f"{Fore.BLUE}Reasons for the Score:")
+        for key, value in self.results.items():
+            if value:
+                print(f"- {key.replace('_', ' ').title()}: {value}")
 
 if __name__ == "__main__":
     if len(sys.argv) == 2 and sys.argv[1] in ('-h', '--help'):
