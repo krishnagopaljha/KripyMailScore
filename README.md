@@ -18,7 +18,9 @@ pip3 install -r requirements.txt
 ```
 Give the necessary executable permission by 
 
-`chmod +x KripyMailScore.py` 
+```sh
+chmod +x KripyMailScore.py
+```
 
 ## Usage
 To run the script use the following command:
