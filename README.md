@@ -26,3 +26,7 @@ To run the script use the following command:
 ```sh
 python3 KripyMailScore.py example.eml
 ```
+
+## Example
+
+![Screenshot 2025-03-07 103807](https://github.com/user-attachments/assets/5d46cf17-6f9f-4b5c-9c73-daf331cc0c84)
