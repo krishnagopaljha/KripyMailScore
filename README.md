@@ -14,12 +14,15 @@ Phishing Email Detector is a Python-based tool that analyzes email files (`.eml`
 This script requires Python 3 and several dependencies. Install the required packages using:
 
 ```sh
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
+Give the necessary executable permission by 
+
+`chmod +x KripyMailScore.py` 
 
 ## Usage
 To run the script use the following command:
 
 ```sh
-pip install -r requirements.txt
+python3 KripyMailScore.py example.eml
 ```
